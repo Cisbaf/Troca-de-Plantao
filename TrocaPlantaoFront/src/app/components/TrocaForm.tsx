@@ -328,7 +328,7 @@ export default function TrocaForm() {
                                                         >
                                                             <Stack gap={6} w="full">
                                                                 {FUNCOES_PLANTAO.map((grupo) => (
-                                                                    <Box key={grupo.grupo} p={{ base: 4, md: 6 }} border="2px solid" borderColor={errors.funcaoPlantao ? "red.400" : "gray.200"} borderRadius="2xl" bg="gray.50">
+                                                                    <Box key={grupo.grupo} p={{ base: 4, md: 6 }} border="2px solid" borderColor={"gray.200"} borderRadius="2xl" bg="gray.50">
                                                                         <Text fontWeight="black" fontSize="sm" color="blue.800" textTransform="uppercase" mb={4} letterSpacing="widest" textAlign={{ base: "center", md: "left" }}>
                                                                             {grupo.grupo}
                                                                         </Text>
@@ -375,7 +375,7 @@ export default function TrocaForm() {
                                                             colorPalette="blue"
                                                             w="full"
                                                         >
-                                                            <Box p={{ base: 4, md: 6 }} border="2px solid" borderColor={errors.unidade ? "red.400" : "gray.200"} borderRadius="2xl" bg="gray.50">
+                                                            <Box p={{ base: 4, md: 6 }} border="2px solid" borderColor={"gray.200"} borderRadius="2xl" bg="gray.50">
                                                                 <VStack align={{ base: "center", md: "start" }} gap={4}>
                                                                     {UNIDADES_ATUACAO.items.map((item) => (
                                                                         <RadioGroup.Item key={item.value} value={item.value} cursor="pointer" p={2} w="full" _hover={{ bg: "blue.50", borderRadius: "md" }}>
