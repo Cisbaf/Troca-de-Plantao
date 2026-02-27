@@ -31,12 +31,16 @@ import {
 
 import { toaster } from "@/app/components/ui/toaster";
 import { FormValues, FUNCOES_PLANTAO, UNIDADES_ATUACAO } from '../type';
+
 import { useState } from 'react';
 import Header from './Header';
+import SuccessTrocaDialog from './ui/SuccessTrocaModal';
 
 export default function TrocaForm() {
 
     const [resetKey, setResetKey] = useState(0); // Adicione este estado
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [trocaId, setTrocaId] = useState<string | null>(null);
 
     const { control, handleSubmit, register, reset, formState: { isSubmitting }, setFocus, formState: { errors }, setValue } = useForm<FormValues>({
         shouldFocusError: true,
@@ -103,7 +107,6 @@ export default function TrocaForm() {
                 sec_requerente: sec,
             };
 
-
             const form = new FormData();
             form.append('dados', new Blob([JSON.stringify(dados)], { type: 'application/json' }));
 
@@ -124,13 +127,11 @@ export default function TrocaForm() {
                 throw new Error(text || `Erro ${res.status}` + text);
             }
 
-
             const json = await res.json();
-            toaster.create({
-                title: 'Sucesso',
-                description: `Troca criada com id ${json.id}`,
-                type: 'success'
-            });
+
+            setTrocaId(json.id);
+            setShowSuccess(true);
+
             reset();
             setResetKey(prev => prev + 1);
 
@@ -1061,6 +1062,11 @@ export default function TrocaForm() {
                     <Link href='/track' color={'gray.400'} _hover={{ color: "blue.800" }}>ACOMPANHAR SOLICITAÇÃO</Link>
                     <Link href='/inspector' color={'gray.400'} _hover={{ color: "blue.800" }}>INSPEÇÃO</Link>
                 </Box>
+                <SuccessTrocaDialog
+                    open={showSuccess}
+                    onClose={() => setShowSuccess(false)}
+                    trocaId={trocaId}
+                />
             </Box>
         </>
     );
