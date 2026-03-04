@@ -65,6 +65,7 @@ public class TrocaMapper {
                 .aceitaSN(troca.getAceitaSN())
                 .nomeInspetor(troca.getNomeInspetor() == null ? "" : troca.getNomeInspetor())
                 .motivoTroca(troca.getMotivoTroca()  == null ? "" : troca.getMotivoTroca())
+                .dataCriacao(troca.getDataCriacao() == null ? "": troca.getDataCriacao().toString())
                 .build();
     }
 
