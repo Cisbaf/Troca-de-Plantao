@@ -40,14 +40,13 @@ public class UserController {
 
             final UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-            var user = userService.getUserByUsernameAndPassword(login.username(), login.password());
+            assert userDetails != null;
+            var user = userService.getUserByUsername(userDetails.getUsername());
 
             String acessToken = jwtTokenUtil.generateToken(login.username(), user.getName());
 
-            boolean isSecure = false;
+            JwtRequestFilter.addCookie(response, JwtRequestFilter.JWT_COOKIE_NAME, acessToken, Math.toIntExact(jwtTokenUtil.getExpirationTime()), true, false);
 
-            JwtRequestFilter.addCookie(response, JwtRequestFilter.JWT_COOKIE_NAME, acessToken, Math.toIntExact(jwtTokenUtil.getExpirationTime()), true, isSecure);
-            assert userDetails != null;
             Map<String, String> responseBody = Map.of(
                     "message", "Login successful",
                     "username", userDetails.getUsername()

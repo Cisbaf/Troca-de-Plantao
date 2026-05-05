@@ -1,6 +1,4 @@
 package com.trocaplantao.auth.service;
-
-
 import com.trocaplantao.auth.entity.UserEntity;
 import com.trocaplantao.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -43,12 +41,8 @@ public class UserService implements UserDetailsService {
         return userRepository.existsByUsername(username);
     }
 
-    public UserEntity getUserByUsernameAndPassword(String username, String password) {
-        log.info("Fetching user by username: {} and password: {}", username, password);
-        log.info("Encoded password: {}", passwordEncoder.encode(password));
-        var user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
-        log.info("Fetched user: {}", user);
-        return userRepository.findByUsername(username).get();
+    public UserEntity getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     public Map<String, String> getAllEmailsAndUsernames() {
