@@ -32,7 +32,7 @@ import {
 import { toaster } from "@/app/components/ui/toaster";
 import { FormValues, FUNCOES_PLANTAO, UNIDADES_ATUACAO } from '../type';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './Header';
 import SuccessTrocaDialog from './ui/SuccessTrocaModal';
 
@@ -41,6 +41,14 @@ export default function TrocaForm() {
     const [resetKey, setResetKey] = useState(0); // Adicione este estado
     const [showSuccess, setShowSuccess] = useState(false);
     const [trocaId, setTrocaId] = useState<string | null>(null);
+    const [dateLimits, setDateLimits] = useState({ min: "", max: "" });
+
+    useEffect(() => {
+        const hoje = new Date();
+        const min = new Date(new Date().setDate(hoje.getDate() - 15)).toISOString().split("T")[0];
+        const max = new Date(new Date().setDate(hoje.getDate() + 30)).toISOString().split("T")[0];
+        setDateLimits({ min, max });
+    }, []);
 
     const { control, handleSubmit, register, reset, formState: { isSubmitting }, setFocus, formState: { errors }, setValue } = useForm<FormValues>({
         shouldFocusError: true,
@@ -259,9 +267,6 @@ export default function TrocaForm() {
 
         return digits.replace(/(\d{2})(\d{5})(\d+)/, '($1) $2-$3');
     }
-
-    const today = new Date(new Date().setDate(new Date().getDate() - 15)).toISOString().split("T")[0]
-
 
     return (
         <>
@@ -577,8 +582,8 @@ export default function TrocaForm() {
                                                 </Field.Label>
                                                 <Input
                                                     type="date"
-                                                    min={new Date(new Date().setDate(new Date().getDate() - 15)).toISOString().split("T")[0]}
-                                                    max={new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split("T")[0]}
+                                                    min={dateLimits.min}
+                                                    max={dateLimits.max}
                                                     {...register('pri_dataTroca', { required: "Data é obrigatória" })}
                                                     h={{ base: "50px", md: "60px" }}
                                                     fontSize="lg"
@@ -890,8 +895,8 @@ export default function TrocaForm() {
                                                 </Field.Label>
                                                 <Input
                                                     type="date"
-                                                    min={new Date(new Date().setDate(new Date().getDate() - 15)).toISOString().split("T")[0]}
-                                                    max={new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split("T")[0]}
+                                                    min={dateLimits.min}
+                                                    max={dateLimits.max}
                                                     {...register('sec_dataTroca', { required: "Data é obrigatória" })}
                                                     h={{ base: "50px", md: "60px" }}
                                                     fontSize="lg"
