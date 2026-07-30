@@ -7,7 +7,7 @@ import {
     DialogHeader,
     DialogRoot,
     DialogTitle,
-} from "@/components/ui/dialog";
+} from "./ui/dialog";
 import { Box, Button, Text, VStack } from "@chakra-ui/react";
 import { CheckCircle, XCircle } from "lucide-react";
 

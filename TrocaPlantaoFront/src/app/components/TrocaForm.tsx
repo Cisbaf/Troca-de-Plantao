@@ -46,7 +46,7 @@ export default function TrocaForm() {
     useEffect(() => {
         const hoje = new Date();
         const min = new Date(new Date().setDate(hoje.getDate() - 15)).toISOString().split("T")[0];
-        const max = new Date(new Date().setDate(hoje.getDate() + 30)).toISOString().split("T")[0];
+        const max = new Date(new Date().setDate(hoje.getDate() + 40)).toISOString().split("T")[0];
         setDateLimits({ min, max });
     }, []);
 
@@ -284,32 +284,34 @@ export default function TrocaForm() {
                     >
                         {/* Header */}
                         <Card.Header
-                            pt={{ base: 8, md: 12 }}
-                            pb={{ base: 6, md: 9 }}
+                            pt={{ base: 10, md: 14 }}
+                            pb={{ base: 8, md: 90 }}
                             px={{ base: 4, md: 8 }}
                             textAlign="center"
+                            bg="#232F53"
                         >
                             <Center>
                                 <VStack gap={4} maxW="3xl">
-                                    <Heading size={{ base: "2xl", md: "4xl" }} fontWeight="black" letterSpacing="tight">
+                                    <Heading size={{ base: "2xl", md: "4xl" }} fontWeight="black" color="white" letterSpacing="tight">
                                         Troca de Plantão
                                     </Heading>
+                                    <Flex align="center" gap={3} direction="column">
+                                        <Heading size={{ base: "lg", md: "xl" }} color="gray.300" fontWeight="bold" textAlign="center">
+                                            Informações Gerais
+                                        </Heading>
+                                        <Text color="gray.500" fontSize={{ base: "md", md: "lg" }} textAlign="center">Selecione a função e a unidade onde ocorrerá o plantão.</Text>
+                                    </Flex>
                                 </VStack>
                             </Center>
                         </Card.Header>
 
-                        <Card.Body p={{ base: 4, md: 14 }} mt={-10} bg="white" borderRadius={{ base: "2xl", md: "4xl" }}>
+                        <Card.Body p={{ base: 4, md: 14 }} mt={-10} bg="white" borderRadius={{ base: "1xl", md: "2xl" }}>
                             <form onSubmit={handleSubmit(onSubmit, onError)}>
                                 <VStack gap={{ base: 8, md: 16 }} align="stretch">
 
                                     {/* Seção 1: Informações do Plantão */}
                                     <VStack gap={{ base: 6, md: 10 }} align="center">
-                                        <Flex align="center" gap={3} direction="column">
-                                            <Heading size={{ base: "lg", md: "xl" }} color="gray.900" fontWeight="bold" textAlign="center">
-                                                Informações Gerais
-                                            </Heading>
-                                            <Text color="gray.600" fontSize={{ base: "md", md: "lg" }} textAlign="center">Selecione a função e a unidade onde ocorrerá o plantão.</Text>
-                                        </Flex>
+
 
                                         <SimpleGrid columns={{ base: 1, xl: 2 }} gap={{ base: 6, md: 10 }} w="full">
                                             <Field.Root required invalid={!!errors.funcaoPlantao} data-field="funcaoPlantao"
@@ -1068,10 +1070,7 @@ export default function TrocaForm() {
                         </Card.Body>
                     </Card.Root>
                 </Container>
-                <Box display={'flex'} justifyContent={'space-evenly'} py={30} >
-                    <Link href='/track' color={'gray.400'} _hover={{ color: "blue.800" }}>ACOMPANHAR SOLICITAÇÃO</Link>
-                    <Link href='/inspector' color={'gray.400'} _hover={{ color: "blue.800" }}>INSPEÇÃO</Link>
-                </Box>
+
                 <SuccessTrocaDialog
                     open={showSuccess}
                     onClose={() => setShowSuccess(false)}
