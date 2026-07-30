@@ -33,6 +33,5 @@ build/
 .vscode/
 /src/main/resources/application.properties
 src/main/resources/application.properties.teste
-src/main/java/com/trocaplantao/auth/config/SecurityConfig.java
 
 .env

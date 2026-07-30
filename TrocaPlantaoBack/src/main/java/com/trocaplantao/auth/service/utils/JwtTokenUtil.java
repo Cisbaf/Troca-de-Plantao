@@ -28,7 +28,7 @@ public class JwtTokenUtil {
 
     public String generateToken(String username, String nomeBase) {
         if (username == null || username.isEmpty()) {
-            throw new IllegalArgumentException("Username and Password cannot be null or empty");
+            throw new IllegalArgumentException("Username cannot be null or empty");
         }
 
         return Jwts.builder()

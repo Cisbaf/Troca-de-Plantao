@@ -44,7 +44,8 @@ public class TrocaMapper {
     private static final Set<String> FUNCOES_ADM = Set.of(
             "SUPERVISOR",
             "AUX_SERVICOS_GERAIS",
-            "APOIO_ADMINISTRATIVO"
+            "APOIO_ADMINISTRATIVO",
+            "MAQUEIRO"
     );
 
     public TrocaResponse toTrocaResponse(Troca troca) {

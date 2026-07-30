@@ -1,7 +1,6 @@
 package com.trocaplantao.sisTroca.entity.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public enum AceitaSN {

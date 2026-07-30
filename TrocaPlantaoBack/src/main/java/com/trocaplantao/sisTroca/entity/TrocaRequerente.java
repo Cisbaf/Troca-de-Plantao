@@ -1,6 +1,5 @@
 package com.trocaplantao.sisTroca.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
